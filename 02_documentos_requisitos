@@ -1,0 +1,135 @@
+# 02_documento_requisitos.md
+
+## Día 2 — Arquitectura y Documento de Requisitos
+
+---
+
+## 1. Descripción funcional del sistema
+
+El sistema **Antigravity Control Horario** es una aplicación orientada al registro y control de la jornada laboral de un usuario.  
+Su propósito es permitir que una persona registre su hora de entrada, hora de salida, pausas realizadas durante el día y el tiempo total efectivamente trabajado.
+
+El sistema busca resolver la necesidad de organizar y monitorear el tiempo laboral de forma simple, clara y escalable.  
+En una versión futura, podrá incluir reportes, exportación de datos y gestión de múltiples usuarios.
+
+---
+
+## 2. Funcionalidades mínimas
+
+Las funcionalidades mínimas propuestas para la primera versión del sistema son:
+
+### 2.1 Registro de usuario
+- Crear un usuario básico con nombre, correo electrónico y rol.
+- Validar que el correo tenga formato correcto.
+
+### 2.2 Registro de jornada laboral
+- Registrar hora de entrada.
+- Registrar hora de salida.
+- Asociar la jornada a un usuario.
+- Calcular la duración total de la jornada.
+
+### 2.3 Gestión de pausas
+- Registrar pausas dentro de una jornada.
+- Guardar duración de cada pausa en minutos.
+- Restar automáticamente el total de pausas al tiempo trabajado.
+
+### 2.4 Cálculo de tiempo trabajado
+- Obtener el total de minutos trabajados.
+- Convertir minutos a formato HH:MM.
+- Mostrar resumen diario.
+
+### 2.5 Reportes básicos
+- Generar una lista de jornadas registradas.
+- Mostrar resumen por jornada:
+  - fecha
+  - usuario
+  - total de pausa
+  - total trabajado
+
+### 2.6 Exportación de datos
+- Simular la exportación de jornadas en formato CSV.
+- Permitir visualizar la estructura de datos exportable.
+
+---
+
+## 3. Arquitectura Front / Backend
+
+Aunque en esta etapa aún no se implementa un backend real ni base de datos remota, se propone una arquitectura conceptual dividida en dos partes:
+
+---
+
+### 3.1 Frontend
+
+El frontend será la capa encargada de la interacción con el usuario.
+
+**Responsabilidades del frontend:**
+- Mostrar formularios de registro
+- Capturar hora de entrada y salida
+- Registrar pausas
+- Mostrar cálculos de tiempo trabajado
+- Mostrar reportes básicos
+- Validar datos antes de enviarlos
+
+**Tecnologías posibles en una futura implementación:**
+- HTML / CSS / JavaScript
+- React (recomendado para escalar)
+- Tailwind CSS (opcional para estilos)
+
+---
+
+### 3.2 Backend
+
+El backend será la capa encargada de la lógica de negocio y manejo de datos.
+
+**Responsabilidades del backend:**
+- Procesar registros de usuario
+- Validar reglas del sistema
+- Calcular tiempos de jornada y pausas
+- Guardar información en base de datos
+- Exponer endpoints o servicios para el frontend
+- Generar reportes y exportaciones
+
+**Tecnologías posibles en una futura implementación:**
+- Node.js + Express
+- API REST
+- Validaciones de negocio
+- Servicios de autenticación en versiones posteriores
+
+---
+
+### 3.3 Flujo general Front / Backend
+
+1. El usuario registra su jornada en el frontend.
+2. El frontend valida datos básicos.
+3. El backend recibe la información.
+4. El backend procesa reglas:
+   - calcula pausas
+   - calcula total trabajado
+   - valida consistencia
+5. El backend devuelve resultados al frontend.
+6. El frontend muestra resumen y reportes.
+
+---
+
+## 4. Modelo de datos propuesto (sin Supabase aún)
+
+En esta etapa se propone un modelo de datos simple basado en objetos JavaScript.
+
+---
+
+### 4.1 Entidad: Usuario
+
+**Campos propuestos:**
+- `id`
+- `nombre`
+- `email`
+- `rol`
+
+**Ejemplo:**
+```js
+{
+  id: 1,
+  nombre: "Josue",
+  email: "josue@gmail.com",
+  rol: "empleado"
+}
